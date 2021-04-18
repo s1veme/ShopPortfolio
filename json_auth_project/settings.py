@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'authentication',
+    'rest_framework_jwt',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -125,3 +127,9 @@ STATIC_URL = '/static/'
 # authentication.User сообщает Django, что мы ссылаемся на модель User в модуле
 # authentication. Этот модуль зарегистрирован выше в настройке INSTALLED_APPS.
 AUTH_USER_MODEL = 'authentication.User'
+
+
+""" REST_FRAMEWORK = {
+    'EXCEPTION_HANDLER': 'json_auth_project.exceptions.core_exception_handler',
+    'NON_FIELD_ERRORS_KEY': 'error',
+} """
