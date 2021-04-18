@@ -2,15 +2,15 @@
   <div class="v-login">
     <div class="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
       <div class="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
-        <form class="px-5 py-7" @submit.prevent="submitLogin">
+        <form class="px-5 py-7" @submit.prevent="login">
           <label class="font-semibold text-sm text-gray-600 pb-1 block"
             >Login</label
           >
-          <small v-if="errors.login" class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">{{ errors.login }}</small>
+          <small v-if="errors.username" class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">{{ errors.username }}</small>
           <input
             type="text"
             class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
-            v-model.trim="login"
+            v-model.trim="username"
           />
           <label 
           class="font-semibold text-sm text-gray-600 pb-1 block"
@@ -50,15 +50,17 @@
 </template>
 
 <script>
+
+
 export default {
   name: "v-login",
 
   data() {
     return {
-        login: '',
+        username: '',
         password: '',
         errors: {
-          login: null,
+          username: null,
           password: null
         }
     };
@@ -68,11 +70,11 @@ export default {
       formIsValid() {
         let isValid = true
 
-        if (this.login.length === 0 ) {
-          this.errors.login = 'Имя не может быть пустым'
+        if (this.username.length === 0 ) {
+          this.errors.username = 'Имя не может быть пустым'
           isValid = false
         } else {
-          this.errors.login = null
+          this.errors.username = null
         }
 
         if (this.password.length === 0) {
@@ -84,20 +86,15 @@ export default {
 
         return isValid
       }, 
-      submitLogin() {
-        if (this.formIsValid()) {
-          console.log(this.login, this.password)
-        }
-
-      },
-
+      
       login() {
-        let login = this.login 
+        let username = this.username 
         let password = this.password
-        this.$store.dispatch('login', { login, password })
-       .then(() => this.$router.push('/'))
-       .catch(err => console.log(err))
+          this.$store.dispatch('login', { username, password })
+        .then(() => this.$router.push('/'))
+        .catch(err => console.log(err))
       }
-    }
+    },
+
   }
 </script>

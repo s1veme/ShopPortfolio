@@ -1,18 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router'
-
-import vBasket from './views/basket-product'
-import vCatalog from './views/v-catalog'
-import vLogin from './views/v-login'
+import store from './vuex/store'
 
 
 const routes = [
     {
         path: '/',
-        component: vCatalog
+        component: () => import('./views/v-catalog'),
     },
     {
         path: '/basket',
-        component: vBasket,
+        component: () => import('./views/basket-product'),
         name: 'basket',
         meta: {
             requiresAuth: true
@@ -20,10 +17,20 @@ const routes = [
     },
     {
         path: '/login',
-        component: vLogin,
+        component: () => import('./views/v-login'),
         name: 'login'
+    },
+    {
+        path: '/registration',
+        component: () => import('./views/v-registration'),
+        name: 'registration'
     }
 ]
+
+const router = createRouter({
+    history: createWebHistory(),
+    routes,
+});
 
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.requiresAuth)) {
@@ -36,10 +43,5 @@ router.beforeEach((to, from, next) => {
         next()
     }
 })
-
-const router = createRouter({
-    history: createWebHistory(),
-    routes,
-});
 
 export default router

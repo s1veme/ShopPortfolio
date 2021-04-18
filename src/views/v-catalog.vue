@@ -4,6 +4,7 @@
             v-for="product in PRODUCTS"
             :key="product.id"
             :productData="product"
+            :isAuth="isLoggedIn"
             @addProductToBacket="addToBacket"
         >
         </v-catalog-item>
@@ -28,7 +29,8 @@ export default {
 
     computed: {
         ...mapGetters([
-            'PRODUCTS'
+            'PRODUCTS',
+            'isLoggedIn'
         ])
     },
 

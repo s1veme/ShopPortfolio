@@ -7,6 +7,7 @@ let store = createStore({
         basket: [],
         isAuth: false,
         token: localStorage.getItem('token') || '',
+        user: {}
     },
     mutations: {
         SET_PRODUCTS_TO_STATE: (state, products) => {
@@ -42,7 +43,7 @@ let store = createStore({
                 method: "GET"
             })
             .then((products) => {
-                commit('SET_PRODUCTS_TO_STATE', products.data)
+                commit('SET_PRODUCTS_TO_STATE', products.data.results)
                 return products
             })
             .catch((error) => {
@@ -60,10 +61,12 @@ let store = createStore({
         login({commit}, user){
             return new Promise((resolve, reject) => {
               commit('auth_request')
-              axios({url: 'http://localhost:3000/login', data: user, method: 'POST' })
+              const username = user.username
+              axios({url: 'http://localhost:8000/auth/jwt/create/', data: user, method: 'POST' })
               .then(resp => {
-                const token = resp.data.token
-                const user = resp.data.user
+                const token = resp.data.access
+                const user = username
+                console.log(token)
                 localStorage.setItem('token', token)
                 axios.defaults.headers.common['Authorization'] = token
                 commit('auth_success', token, user)
