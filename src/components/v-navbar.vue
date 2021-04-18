@@ -27,6 +27,7 @@
           v-if="isLoggedIn"
           >Basket</router-link
         >
+        <span v-if="isLoggedIn" class="text-gray-700 text-center bg-gray-400 px-4 py-2 m-2"> | <a @click="logout">Logout</a></span>
         <router-link
           to="/login"
           class="text-gray-700 text-center bg-gray-400 px-4 py-2 m-2"
@@ -34,11 +35,11 @@
           >Login</router-link
         >
         <router-link
-        to="/registration"
-        v-if="!isLoggedIn"
-        class="text-gray-700 text-center bg-gray-400 px-4 py-2 m-2"
+          to="/registration"
+          v-if="!isLoggedIn"
+          class="text-gray-700 text-center bg-gray-400 px-4 py-2 m-2"
         >
-        Registration
+          Registration
         </router-link>
       </div>
     </div>
@@ -46,7 +47,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "v-navbar",
@@ -57,6 +58,17 @@ export default {
   computed: {
     ...mapGetters(["isLoggedIn"]),
   },
+
+  methods: {
+    ...mapActions(["logout"]),
+
+logout() {
+        this.$store.dispatch('logout')
+        .then(() => {
+          this.$router.push('/login')
+        })
+      }
+    }
 };
 </script>
 

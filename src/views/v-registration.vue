@@ -114,7 +114,14 @@ export default {
     },
 
     registration() {
-      console.log('TODO: Registration')
+        let data = {
+          username: this.username,
+          email: this.email,
+          password: this.password,
+        }
+        this.$store.dispatch('register', data)
+       .then(() => this.$router.push('/'))
+       .catch(err => console.log(err))
     }
   },
 };

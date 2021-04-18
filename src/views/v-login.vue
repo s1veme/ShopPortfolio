@@ -4,13 +4,13 @@
       <div class="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
         <form class="px-5 py-7" @submit.prevent="login">
           <label class="font-semibold text-sm text-gray-600 pb-1 block"
-            >Login</label
+            >email</label
           >
-          <small v-if="errors.username" class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">{{ errors.username }}</small>
+          <small v-if="errors.email" class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">{{ errors.email }}</small>
           <input
             type="text"
             class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
-            v-model.trim="username"
+            v-model.trim="email"
           />
           <label 
           class="font-semibold text-sm text-gray-600 pb-1 block"
@@ -60,7 +60,7 @@ export default {
         username: '',
         password: '',
         errors: {
-          username: null,
+          email: null,
           password: null
         }
     };
@@ -70,8 +70,8 @@ export default {
       formIsValid() {
         let isValid = true
 
-        if (this.username.length === 0 ) {
-          this.errors.username = 'Имя не может быть пустым'
+        if (this.email.length === 0 ) {
+          this.errors.username = 'Поле email не может быть пустым'
           isValid = false
         } else {
           this.errors.username = null
@@ -88,9 +88,9 @@ export default {
       }, 
       
       login() {
-        let username = this.username 
+        let email = this.email 
         let password = this.password
-          this.$store.dispatch('login', { username, password })
+          this.$store.dispatch('login', { email, password })
         .then(() => this.$router.push('/'))
         .catch(err => console.log(err))
       }

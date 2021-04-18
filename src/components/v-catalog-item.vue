@@ -11,8 +11,7 @@
           <h2 class="text-2xl uppercase">{{ productData.name }}</h2>
           <p class="font-light text-gray-500 text-lg my-2">${{ productData.price_now }};</p>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt
+            {{ productData.short_description }}
           </p>
           <a
             href="#"

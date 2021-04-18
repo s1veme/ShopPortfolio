@@ -35,7 +35,6 @@ export default {
       'REMOVE_PRODUCT_IN_BASKET'
     ]),
     removeToBasket(index) {
-      console.log(index)
       this.REMOVE_PRODUCT_IN_BASKET(index)
     }
   }
