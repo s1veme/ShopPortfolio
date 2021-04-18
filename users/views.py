@@ -9,4 +9,4 @@ class YozjkeView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        return Response({'key': 'yozjke136'})
+        return Response({'key': 'GRIBAN YSATIU'})

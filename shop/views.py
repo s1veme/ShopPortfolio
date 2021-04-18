@@ -20,7 +20,7 @@ class ProductCategoryView(generics.CreateAPIView):
 class ProductCategoryListView(generics.ListAPIView):
     serializer_class = CategoryListSerializer
     queryset = ProductCategory.objects.all()
-    permission_classes = (IsAuthenticated,)
+    #permission_classes = (IsAuthenticated,)
 
 #РЕАЛИЗАЦИЯ GET, PUT, PATCH, DELETE КАТЕГОРИИ
 class ProductCategoryDeteilView(generics.RetrieveUpdateDestroyAPIView):
@@ -36,7 +36,7 @@ class ProductView(generics.CreateAPIView):
 class ProductListView(generics.ListAPIView):
     serializer_class = ProductListSerializer
     queryset = Product.objects.all()
-    permission_classes = (IsAdminUser,)
+    #permission_classes = (IsAdminUser,)
 
 #РЕАЛИЗАЦИЯ GET, PUT, PATCH, DELETE ПРОДУКТА
 class ProductDeteilView(generics.RetrieveUpdateDestroyAPIView):
