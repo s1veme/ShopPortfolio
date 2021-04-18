@@ -17,6 +17,10 @@ class RegistrationAPIView(APIView):
 
     def post(self, request):
         user = request.data.get('user', {})
+        
+        print()
+        print('USER\n', user)
+        print()
 
         # Паттерн создания сериализатора, валидации и сохранения - довольно стандартный
         serializer = self.serializer_class(data=user)
