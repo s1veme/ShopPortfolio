@@ -33,7 +33,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
 class LoginSerializer(serializers.Serializer):
     email = serializers.CharField(max_length=255)
-    username = serializers.CharField(max_length=255, read_only=True) # (read_only - Поля только для чтения включаются в выходные данные API) - значение, True чтобы гарантировать, что поле используется при сериализации представления, но не используется при создании или обновлении экземпляра во время десериализации.
+    # username = serializers.CharField(max_length=255, read_only=True) # (read_only - Поля только для чтения включаются в выходные данные API) - значение, True чтобы гарантировать, что поле используется при сериализации представления, но не используется при создании или обновлении экземпляра во время десериализации.
     password = serializers.CharField(max_length=128, write_only=True) #(write_only) -  значение, True чтобы гарантировать, что поле может использоваться при обновлении или создании экземпляра, но не будет включено при сериализации представления.
     token = serializers.CharField(max_length=255, read_only=True)
 
@@ -82,7 +82,7 @@ class LoginSerializer(serializers.Serializer):
         # данные, которые передются в т.ч. в методы create и update.
         return {
             'email': user.email,
-            'username': user.username,
+            #'username': user.username,
             'token': user.token
         }
 
