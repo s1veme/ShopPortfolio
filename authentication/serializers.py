@@ -36,6 +36,7 @@ class LoginSerializer(serializers.Serializer):
     # username = serializers.CharField(max_length=255, read_only=True) # (read_only - Поля только для чтения включаются в выходные данные API) - значение, True чтобы гарантировать, что поле используется при сериализации представления, но не используется при создании или обновлении экземпляра во время десериализации.
     password = serializers.CharField(max_length=128, write_only=True) #(write_only) -  значение, True чтобы гарантировать, что поле может использоваться при обновлении или создании экземпляра, но не будет включено при сериализации представления.
     token = serializers.CharField(max_length=255, read_only=True)
+    is_staff = serializers.BooleanField(default=False)
 
     def validate(self, data):
         # В методе validate мы убеждаемся, что текущий экземпляр
@@ -80,11 +81,18 @@ class LoginSerializer(serializers.Serializer):
 
         # Метод validate должен возвращать словарь проверенных данных. Это
         # данные, которые передются в т.ч. в методы create и update.
-        return {
+        
+        data_user = {
             'email': user.email,
             #'username': user.username,
-            'token': user.token
+            'token': user.token,
         }
+        
+        if user.is_staff:
+            data_user.update({'is_staff': user.is_staff})
+        
+        return data_user
+            
 
 
 
