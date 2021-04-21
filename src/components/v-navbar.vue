@@ -20,6 +20,8 @@
       <div class="flex flex-row-reverse mr-4 ml-4 md:hidden">
         <i class="fas fa-bars"></i>
       </div>
+      <h1 v-if="isAdmin">Я АДМИН</h1>
+      <h1>{{ isAdmin }}</h1>
       <div class="flex flex-row-reverse mr-8 hidden md:flex">
         <router-link
           to="/basket"
@@ -27,7 +29,7 @@
           v-if="isLoggedIn"
           >Basket</router-link
         >
-        <span v-if="isLoggedIn" class="text-gray-700 text-center bg-gray-400 px-4 py-2 m-2"> | <a @click="logout">Logout</a></span>
+        <span v-if="isLoggedIn" class="text-gray-700 text-center bg-gray-400 px-4 py-2 m-2"><a @click="logout">Logout</a></span>
         <router-link
           to="/login"
           class="text-gray-700 text-center bg-gray-400 px-4 py-2 m-2"
@@ -47,20 +49,20 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
-  name: "v-navbar",
+  name: 'v-navbar',
   data() {
     return {};
   },
 
   computed: {
-    ...mapGetters(["isLoggedIn"]),
+    ...mapGetters(['isLoggedIn', 'isAdmin']),
   },
 
   methods: {
-    ...mapActions(["logout"]),
+    ...mapActions(['logout']),
 
 logout() {
         this.$store.dispatch('logout')

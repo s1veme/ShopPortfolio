@@ -24,9 +24,9 @@ let store = createStore({
         auth_request(state) {
             state.status = 'loading'
         },
-        auth_success(state, token, user) {
+        auth_success(state, user) {
             state.status = 'success'
-            state.token = token
+            state.token = user['token']
             state.user = user
         },
         auth_error(state) {
@@ -64,9 +64,14 @@ let store = createStore({
                 axios({ url: 'http://localhost:8000/api/user/login/', data: user, method: 'POST' })
                     .then(resp => {
                         const token = resp.data.user.token
+                        const isStaff = resp.data.user.is_staff
+
+                        user['token'] = token
+                        user['isAdmin'] = isStaff
+
                         localStorage.setItem('token', token)
                         axios.defaults.headers.common['Authorization'] = token
-                        commit('auth_success', token, user)
+                        commit('auth_success', user)
                         resolve(resp)
                     })
                     .catch(err => {
@@ -115,6 +120,7 @@ let store = createStore({
         },
         isLoggedIn: state => !!state.token,
         authStatus: state => state.status,
+        isAdmin: state => state.user['isAdmin']
     }
 })
 

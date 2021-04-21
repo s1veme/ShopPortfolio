@@ -9,7 +9,7 @@ const routes = [
     },
     {
         path: '/basket',
-        component: () => import('./views/basket-product'),
+        component: () => import('./views/v-basket-product'),
         name: 'basket',
         meta: {
             requiresAuth: true
